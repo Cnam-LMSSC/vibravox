@@ -5,18 +5,12 @@ from datasets import load_dataset, Audio, DatasetDict
 from lightning import LightningDataModule
 from torch.utils.data import DataLoader
 from transformers import Wav2Vec2FeatureExtractor, Wav2Vec2CTCTokenizer
+
+from vibravox.constants import LIST_OF_VIBRAVOX
 from vibravox.torch_modules.dsp.data_augmentation import WaveformDataAugmentation
 
 
 class STPLightningDataModule(LightningDataModule):
-
-    LIST_OF_VIBRAVOX = [
-        "Cnam-LMSSC/vibravox",
-        "Cnam-LMSSC/vibravox2",
-        "Cnam-LMSSC/vibravox-test",
-        "Cnam-LMSSC/non_curated_vibravox",
-        "Cnam-LMSSC/vibravox_enhanced_by_EBEN",
-    ]
 
     def __init__(
         self,
@@ -57,12 +51,12 @@ class STPLightningDataModule(LightningDataModule):
         self.sample_rate = sample_rate
         self.dataset_name_principal = dataset_name_principal
         assert (
-            dataset_name_principal in self.LIST_OF_VIBRAVOX
+            dataset_name_principal in LIST_OF_VIBRAVOX
         ), f"dataset_name_principal {dataset_name_principal} not supported."
 
         self.dataset_name_secondary = dataset_name_secondary
         assert (
-            dataset_name_secondary is None or dataset_name_secondary in self.LIST_OF_VIBRAVOX
+            dataset_name_secondary is None or dataset_name_secondary in LIST_OF_VIBRAVOX
         ), f"dataset_name_secondary {dataset_name_secondary} not supported."
         self.subset = subset
         self.sensor = sensor
