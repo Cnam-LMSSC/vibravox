@@ -7,19 +7,12 @@ from datasets import Audio, load_dataset, DatasetDict
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
 
+from vibravox.constants import LIST_OF_VIBRAVOX
 from vibravox.torch_modules.dsp.data_augmentation import WaveformDataAugmentation
 from vibravox.utils import set_audio_duration
 
 
 class BWELightningDataModule(LightningDataModule):
-
-    LIST_OF_VIBRAVOX = [
-        "Cnam-LMSSC/vibravox",
-        "Cnam-LMSSC/vibravox2",
-        "Cnam-LMSSC/vibravox-test",
-        "Cnam-LMSSC/non_curated_vibravox",
-        "Cnam-LMSSC/vibravox_enhanced_by_EBEN",
-    ]
 
     def __init__(
         self,
@@ -63,12 +56,12 @@ class BWELightningDataModule(LightningDataModule):
 
         self.dataset_name_principal = dataset_name_principal
         assert (
-            dataset_name_principal in self.LIST_OF_VIBRAVOX
+            dataset_name_principal in LIST_OF_VIBRAVOX
         ), f"dataset_name_principal {dataset_name_principal} not supported."
 
         self.dataset_name_secondary = dataset_name_secondary
         assert (
-            dataset_name_secondary is None or dataset_name_secondary in self.LIST_OF_VIBRAVOX
+            dataset_name_secondary is None or dataset_name_secondary in LIST_OF_VIBRAVOX
         ), f"dataset_name_secondary {dataset_name_secondary} not supported."
 
         self.subset = subset

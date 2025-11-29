@@ -5,7 +5,6 @@ from lightning import LightningDataModule
 from datasets import Audio, load_dataset
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
-from lightning import LightningDataModule
 from vibravox.utils import mix_speech_and_noise_without_rescaling
 from vibravox.utils import set_audio_duration
 from vibravox.torch_modules.dsp.data_augmentation import WaveformDataAugmentation
